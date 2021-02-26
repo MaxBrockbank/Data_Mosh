@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './Components/App';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import rootReducer from './Reducers/index';
@@ -9,11 +9,9 @@ import { Provider } from 'react-redux';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 import firebase from './firebase';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(rootReducer);
-store.subscribe(() =>
-  console.log(store.getState())
-);
 
 const rrfProps = {
   firebase, 

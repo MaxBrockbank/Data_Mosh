@@ -1,24 +1,19 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-class ControlPanel extends React.Component(){
-  constructor(props){
-    super(props);
-    this.state = {
+function ControlPanel(){
 
-    }
-  }
-
-  render(){
-    return();
-  }
-
-
+  return(
+    <>
+      <div className="controlPanelBody">
+        <div>
+          <h3>Music List</h3>
+        </div>
+        <div>
+          <h3>Animation List</h3>
+        </div>
+      </div>
+    </>
+  );
 }
 
-const mapStateToProps = {
-
-}
-
-ControlPanel = connect(mapStateToProps)(ControlPanel);
 export default ControlPanel;

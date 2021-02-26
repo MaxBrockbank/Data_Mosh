@@ -13,7 +13,6 @@ This will be an audio visualizer, to add to a user’s music listening experienc
 * React
 * Web Audio API
 * Canvas API
-* More TBD
 
 ### Project Stretch Goals
 * Create multiple animation components that the user can choose from
