@@ -7,3 +7,4 @@
 * 8:20 - Build react structure and add other needed packages such as Redux and Firbase 
 * 8:30 - Research on sidenav component and component rendering / component diagram
 * 9:10 - Set up Firebase database and connect to project
+* 10:30 - Set up Redux store for project along with database
