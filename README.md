@@ -8,6 +8,14 @@
 # Description
 Screen Mosh is an audio visualizer built in react, with the music stored in a Firbase NoSQL database. Choose a song to listen to and watch some crazy animations happen!
 
+
+
+## Minimum Viable Product
+* A sleek, minimual UI
+* A firebase database of audio files
+* Reactive animation to selected music file
+
+
 ## Required Technologies
 * Modern Web Browser
 * Text Editor
