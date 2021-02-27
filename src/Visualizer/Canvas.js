@@ -1,6 +1,7 @@
 import React from 'react'
 import songFile from './../Audio/BILLYJOEL.mp3';
 import * as BS from 'react-icons/bs'
+import { withFirestore } from 'react-redux-firebase';
 
 class Canvas extends React.Component{
   constructor(props){
@@ -25,13 +26,23 @@ class Canvas extends React.Component{
     }
   }
 
+  logStorage = () => {
+    this.props.firestore.get({collection:'songs', doc:'9i3lOIV3KYaT82P2iZ9u'}).then((test) => {
+      const newStorage = {
+        test: test.get("test")
+      }
+      console.log(newStorage);
+    })
+  }
+
   render (){
     return(
       <>
         <button onClick={this.togglePlay}>{this.state.buttonIcon}</button>
+        <button onClick ={this.logStorage}>Log Storage</button>
       </>
     );
   }
 }
 
-export default Canvas
+export default withFirestore(Canvas);

@@ -10,3 +10,5 @@
 * 11:00 AM - Building the sidenav control pannel
 * 1:00 PM - Debugging Firebase errors, keep building control pannel sidenav
 * 2:50 PM - Switching gears, working on getting an audio file playing and pausing working first
+* 3:30 PM - Work on moving audio files to Firebase
+* 4:15 PM - Still working on creating a database of audio files
