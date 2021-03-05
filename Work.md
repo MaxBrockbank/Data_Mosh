@@ -12,3 +12,7 @@
 * 2:50 PM - Switching gears, working on getting an audio file playing and pausing working first
 * 3:30 PM - Work on moving audio files to Firebase
 * 4:15 PM - Still working on creating a database of audio files
+
+
+### Friday, March 5, 2021
+* 8:20 AM - Resolve Databse CORS issues
