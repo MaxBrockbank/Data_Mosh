@@ -15,4 +15,11 @@
 
 
 ### Friday, March 5, 2021
-* 8:20 AM - Resolve Databse CORS issues
+* 8:20 AM - Resolve databse CORS issues
+* 9:25 AM - Potentially resolved CORS issues, working on basic visualizer now
+* 12:50 PM - Basic visualizer done, auido source node problems resolved
+* 2:05 PM - Seperating canvas visualizer to seperate component
+* 2:50 PM - Still working on seperating visualizer from main component
+
+### Monday, March 8th, 2021
+* 9:15 AM - Research for moving visualizer to separate component
