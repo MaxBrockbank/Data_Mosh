@@ -34,24 +34,37 @@ class vizOne extends React.Component{
             y_end = center_y + Math.sin(rads * i) * (radius + bar_height);
             
     
-            this.drawBar(x, y, x_end, y_end, this.props.frequency_array[i], ctx, canvas);
+            this.drawLine(ctx, canvas);
         }
     }
     
-    drawBar(x1=0, y1=0, x2=0, y2=0, frequency, ctx, canvas) {
-
+    drawLine(ctx, canvas) {
     
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
-      gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
-      ctx.fillStyle = gradient;
-      
-      const lineColor = "rgb(" + frequency + ", " + frequency + ", " + 205 + ")";
-      ctx.strokeStyle = lineColor;
-      ctx.lineWidth = bar_width;
+      ctx.fillStyle = 'rgb(200, 200, 200)';
+      ctx.fillRect(0, 0, width, height);
+
+
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgb(0, 0, 0)';
       ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
+
+      var sliceWidth = width * 1.0 / this.props.analyser.frequencyBinCount;
+      var x = 0;
+
+      for(let i = 0; i < this.props.analyser.frequencyBinCount; i++) {
+
+        let v = this.props.frequency_array[i] / 132.0;
+        let y = v * height/2;
+
+        if(i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      }
+      ctx.lineTo(canvas.width, canvas.height/2);
       ctx.stroke();
     }
     

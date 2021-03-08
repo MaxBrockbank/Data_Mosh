@@ -3,6 +3,7 @@ import { withFirestore } from 'react-redux-firebase';
 import firebase from 'firebase/app'
 import "firebase/storage";
 import VizOne from './vizOne';
+import VizTwo from './vizTwo';
 
 class Canvas extends React.Component{
   constructor(props){
@@ -85,7 +86,7 @@ class Canvas extends React.Component{
         key={index}>{song.name.slice(0,-4)}
         </button>
       })}
-      <VizOne ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} />
+      <VizTwo ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} />
       </>
     );
   }
