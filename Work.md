@@ -24,3 +24,6 @@
 ### Monday, March 8th, 2021
 * 9:15 AM - Research for moving visualizer to separate component
 * 1:00 PM - Start working on second visualizer
+
+### Tuesday, March 9th, 2021
+* 8:30 AM - Start work on conditional rendering of vizualisers

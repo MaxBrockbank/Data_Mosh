@@ -45,8 +45,8 @@ class vizOne extends React.Component{
       gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
       gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
       ctx.fillStyle = gradient;
-      
-      const lineColor = "rgb(" + frequency + ", " + frequency + ", " + 205 + ")";
+    
+      const lineColor = "#ff4a65";
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = bar_width;
       ctx.beginPath();
@@ -56,23 +56,28 @@ class vizOne extends React.Component{
     }
     
     tick = () => {
-      this.animationLooper(this.canvas.current);
-      this.props.analyser.getByteTimeDomainData(this.props.frequency_array);
-      this.rafId = requestAnimationFrame(this.tick);
+      if(this.canvas.current !== null){
+        this.animationLooper(this.canvas.current);
+        this.props.analyser.getByteTimeDomainData(this.props.frequency_array);
+        this.rafId = requestAnimationFrame(this.tick);
+      } else {
+        return 
+      }
     }
   
     render(){
-
       return(
+        <>
         <canvas ref={this.canvas} />
+        {console.log(this.canvas.current)}
+        </>
       )
-
     }
 }
 
 vizOne.propTypes = {
-  frequency_array: PropTypes.array,
-  analyser: PropTypes.node
+  frequency_array: PropTypes.object,
+  analyser: PropTypes.any, 
 }
 
 export default vizOne;

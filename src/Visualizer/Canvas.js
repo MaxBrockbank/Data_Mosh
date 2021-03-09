@@ -4,6 +4,8 @@ import firebase from 'firebase/app'
 import "firebase/storage";
 import VizOne from './vizOne';
 import VizTwo from './vizTwo';
+import './../App.css'
+import {Container, Row, Col} from 'react-bootstrap';
 
 class Canvas extends React.Component{
   constructor(props){
@@ -12,29 +14,35 @@ class Canvas extends React.Component{
     this.state = {
       context: null,
       audio: null,
+      source: null,
       audioList:[],
+      currentViz: null
     }
   }
   togglePlay = (audio, source) => {
     this.setState({
-      audio: audio
+      audio: audio,
+      source: source
     })
+    
     if(audio.paused){
-      if(this.context !== undefined){
-        this.freqArray(source);
-      }
       this.state.audioList.map(song => {
         song.audio.pause();
         if(song.audio !== audio){
           song.audio.currentTime = 0;
         }
       })
+      this.freqArray(source);
       audio.play()
-      console.log(this.canvas.current)
-      requestAnimationFrame(this.canvas.current.tick);
+      if(this.state.currentViz !== null && this.canvas.current !== null){
+        requestAnimationFrame(this.canvas.current.tick);
+      }
     } else {
       audio.pause();
-      cancelAnimationFrame(this.canvas.rafId);
+      source.disconnect(this.analyser)
+      if(this.state.currentViz !== null){
+        cancelAnimationFrame(this.canvas.rafId);
+      }
     }
   }
 
@@ -47,7 +55,18 @@ class Canvas extends React.Component{
   }
   
 
-
+  async setCurrentViz(type){
+    const {audio, source} = this.state;
+    this.setState({
+      currentViz: type
+    })
+    if(audio !== null){
+      if(!audio.paused){
+        await cancelAnimationFrame(this.canvas.rafId);
+        requestAnimationFrame(this.canvas.current.tick);
+      }
+    }
+  }
 
   componentDidMount(){
     this.state.context = new AudioContext();
@@ -74,19 +93,36 @@ class Canvas extends React.Component{
 
   render (){
 
+    let viz;
+    let playButton = null;
+    if(this.state.currentViz === "blob"){
+      viz =  <VizOne ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} />;
+    } else if(this.state.currentViz === "wave"){
+      viz =  <VizTwo ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} />;
+    }
+
+    // if(this.state.audio !== null){
+    //   playButton = <button onClick={() => {this.togglePlay(this.state.audio, this.state.source)}}>Play/Pause</button>
+    // }
+    
     return(
       <>
-      {this.state.audioList.map((song, index) => {
-        return <button className="playbuttons"
-        onClick={(event) => {
-          this.togglePlay(song.audio, song.source)
-          document.querySelectorAll('.playbuttons').forEach( button => button.style.backgroundColor = null)
-          event.target.style.backgroundColor= !song.audio.paused ? "lightgreen" : "tomato"
-        }}
-        key={index}>{song.name.slice(0,-4)}
-        </button>
-      })}
-      <VizTwo ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} />
+        <div>
+        <button onClick={() => this.setCurrentViz('blob')}>Blob</button>
+        <button onClick={() => this.setCurrentViz('wave')}>Waveform</button>
+        </div>
+        {this.state.audioList.map((song, index) => {
+          return <button className="playbuttons"
+          onClick={() => {
+            this.togglePlay(song.audio, song.source)
+          }}
+          key={index}>{song.name.slice(0,-4)}
+          </button>
+        })}
+      <div>
+      {/* {playButton} */}
+      {viz}
+      </div>
       </>
     );
   }
