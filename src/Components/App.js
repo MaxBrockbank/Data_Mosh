@@ -1,9 +1,11 @@
 import React from 'react';
-import Visualizer from './../Visualizer/index'
+import Controller from './../Visualizer/Controller'
 function App() {
   return (
     <>
-      <Visualizer />
+    <header className="App-header">
+      <Controller />
+    </header>
     </>
   );
 }

@@ -1,12 +1,22 @@
-<h1 align="center">// Screen Mosh \\</h1>
+<h1 align="center">  
+
+╭━━━┳━━━┳━━━━┳━━━╮╭━╮╭━┳━━━┳━━━┳╮╱╭╮
+╰╮╭╮┃╭━╮┃╭╮╭╮┃╭━╮┃┃┃╰╯┃┃╭━╮┃╭━╮┃┃╱┃┃
+╱┃┃┃┃┃╱┃┣╯┃┃╰┫┃╱┃┃┃╭╮╭╮┃┃╱┃┃╰━━┫╰━╯┃
+╱┃┃┃┃╰━╯┃╱┃┃╱┃╰━╯┃┃┃┃┃┃┃┃╱┃┣━━╮┃╭━╮┃
+╭╯╰╯┃╭━╮┃╱┃┃╱┃╭━╮┃┃┃┃┃┃┃╰━╯┃╰━╯┃┃╱┃┃
+╰━━━┻╯╱╰╯╱╰╯╱╰╯╱╰╯╰╯╰╯╰┻━━━┻━━━┻╯╱╰╯
+
+</h1>
 <div align="center">
 <img src="https://github.com/MaxBrockbank.png" width="200px" height="auto" >
 </div>
 <p align="center">Authored by Max Brockabnk</p>
-<p align="center">Updated on Feb 26, 2021</p>
+<p align="center">Updated on March 10th, 2021</p>
 
 # Description
-Screen Mosh is an audio visualizer built in react, with the music stored in a Firbase NoSQL database. Choose a song to listen to and watch some crazy animations happen!
+
+Welcome to Data Mosh! An audio visualizer to make your music listening experience to the next level. Current there are two vizualization experiences to choose from, the ability to adjust the color of the visuals, and a song selection pulled from a Firebase Database.
 
 
 
@@ -29,15 +39,15 @@ Screen Mosh is an audio visualizer built in react, with the music stored in a Fi
 5. Finally to build and start the development server and view the project run the command `npm start`.
 
 ## Technologies Used
-* JavaScript
-* React / JSX
+* JavaScript / React
 * React-Bootstrap
 * CSS
-* Redux / React Redux
-* Firebase / Firestore
+* Firebase 
+* Canvas API
+* Web Audio API
 
 ## Component Diagram
-<img src="READMEAssets/componentDiagram.jpg" alt="Taphouse component diagram">
+<img src="READMEAssets/componentDiagram.jpg" alt="Data Mosh Component Diagram">
 
 ## Known Bugs
 

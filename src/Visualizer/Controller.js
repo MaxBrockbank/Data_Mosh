@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button'
 import ReactColorPicker from '@super-effective/react-color-picker';
 
 
-class Canvas extends React.Component{
+class Controller extends React.Component{
   constructor(props){
     super(props);
     this.canvas = React.createRef()
@@ -22,7 +22,7 @@ class Canvas extends React.Component{
       source: null,
       audioList:[],
       currentViz: null,
-      color: "#ff4a65"
+      color: "#ffd24a"
     }
   }
   togglePlay = (audio, source) => {
@@ -120,7 +120,7 @@ class Canvas extends React.Component{
               <DataMosh style={{marginBottom:"20px"}} color={this.state.color}/>
               <hr/>
               <h4>Select Animation Type</h4>
-              <ButtonGroup aria-label="Basic example">
+              <ButtonGroup aria-label="Basic example" style={{width:"75%"}}>
                 <Button className="vizi" variant="outline-light" onClick={(event) => {
                   this.setCurrentViz('blob')
                   document.querySelectorAll('.vizi').forEach(button =>{ 
@@ -156,7 +156,7 @@ class Canvas extends React.Component{
               <br/>
               <hr/>
               <h4>Select Song</h4>
-              <ButtonGroup vertical>
+              <ButtonGroup vertical style={{width:"75%"}}>
               {this.state.audioList.map((song, index) => {
                 return <Button onClick={(event) => {
                   this.togglePlay(song.audio, song.source)
@@ -191,4 +191,4 @@ class Canvas extends React.Component{
   }
 }
 
-export default withFirestore(Canvas);
+export default withFirestore(Controller);
