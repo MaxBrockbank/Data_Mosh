@@ -27,3 +27,8 @@
 
 ### Tuesday, March 9th, 2021
 * 8:30 AM - Start work on conditional rendering of vizualisers
+* 12:00 PM - Start working on page layout
+
+### Wednesday, March 10th, 2021
+* 8:30 AM - Add color picker component and functionality
+* 10:20 AM - Research into hosting site with Firebase

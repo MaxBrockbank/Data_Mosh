@@ -4,8 +4,13 @@ import firebase from 'firebase/app'
 import "firebase/storage";
 import VizOne from './vizOne';
 import VizTwo from './vizTwo';
+import DataMosh from './dataMosh';
 import './../App.css'
 import {Container, Row, Col} from 'react-bootstrap';
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
+import ReactColorPicker from '@super-effective/react-color-picker';
+
 
 class Canvas extends React.Component{
   constructor(props){
@@ -16,7 +21,8 @@ class Canvas extends React.Component{
       audio: null,
       source: null,
       audioList:[],
-      currentViz: null
+      currentViz: null,
+      color: "#ff4a65"
     }
   }
   togglePlay = (audio, source) => {
@@ -68,6 +74,10 @@ class Canvas extends React.Component{
     }
   }
 
+  changeColor(color){
+    this.setState({color:color});
+  }
+
   componentDidMount(){
     this.state.context = new AudioContext();
     const storage = firebase.storage();
@@ -93,36 +103,89 @@ class Canvas extends React.Component{
 
   render (){
 
-    let viz;
+    let viz ;
     let playButton = null;
     if(this.state.currentViz === "blob"){
-      viz =  <VizOne ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} />;
+      viz =  <VizOne ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} color={this.state.color}/>;
     } else if(this.state.currentViz === "wave"){
-      viz =  <VizTwo ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} />;
+      viz =  <VizTwo ref={this.canvas} frequency_array = {this.frequency_array} analyser={this.analyser} color={this.state.color}/>;
     }
-
-    // if(this.state.audio !== null){
-    //   playButton = <button onClick={() => {this.togglePlay(this.state.audio, this.state.source)}}>Play/Pause</button>
-    // }
     
     return(
       <>
-        <div>
-        <button onClick={() => this.setCurrentViz('blob')}>Blob</button>
-        <button onClick={() => this.setCurrentViz('wave')}>Waveform</button>
-        </div>
-        {this.state.audioList.map((song, index) => {
-          return <button className="playbuttons"
-          onClick={() => {
-            this.togglePlay(song.audio, song.source)
-          }}
-          key={index}>{song.name.slice(0,-4)}
-          </button>
-        })}
-      <div>
-      {/* {playButton} */}
-      {viz}
-      </div>
+      <Container fluid style={{padding:0}}>
+        <Row style={{width:"100"}} noGutters >
+          <Col className="controlPanel" xs={3} md={3} >
+            <div className="buttonHub">
+              <DataMosh style={{marginBottom:"20px"}} color={this.state.color}/>
+              <hr/>
+              <h4>Select Animation Type</h4>
+              <ButtonGroup aria-label="Basic example">
+                <Button className="vizi" variant="outline-light" onClick={(event) => {
+                  this.setCurrentViz('blob')
+                  document.querySelectorAll('.vizi').forEach(button =>{ 
+                    if(button.classList.contains('active')){
+                    button.classList.remove('active')
+                    }
+                  })
+                  if(event.target.classList.contains('active')){
+                    event.target.classList.remove('active');
+                  } else {
+                    event.target.classList.add('active');
+                  }
+                  }}>Blob</Button>
+                <Button className="vizi" variant="outline-light" onClick={(event) => {
+                  this.setCurrentViz('wave')
+                  document.querySelectorAll('.vizi').forEach(button =>{ 
+                    if(button.classList.contains('active')){
+                    button.classList.remove('active')
+                    }
+                  })
+                  if(event.target.classList.contains('active')){
+                    event.target.classList.remove('active');
+                  } else {
+                    event.target.classList.add('active');
+                  }
+                  }}>Wave</Button>
+                {/* <Button variant="secondary">Right</Button> */}
+              </ButtonGroup>
+              <hr/>
+              <br/>
+              <h4>Select Animation Color</h4>
+              <ReactColorPicker onChange={(color) => this.changeColor(color)} color={this.state.color} style={{width:'75%', margin: '0 auto'}}/>
+              <br/>
+              <hr/>
+              <h4>Select Song</h4>
+              <ButtonGroup vertical>
+              {this.state.audioList.map((song, index) => {
+                return <Button onClick={(event) => {
+                  this.togglePlay(song.audio, song.source)
+                  document.querySelectorAll('.songButton').forEach(button =>{ 
+                    if(button.classList.contains('active')){
+                      button.classList.remove('active')
+                    }
+                  })
+                  if(!event.target.classList.contains('active')){
+                    event.target.classList.add('active');
+                  }
+                }}
+                className="songButton"
+                variant="outline-light"
+                key={index}
+                >
+                  {song.name.slice(0,-4)}
+                </Button>
+              })}
+              </ButtonGroup>
+            </div>
+          </Col>
+          <Col xs={9} md={9}>
+          <div className="vizCol" style={{padding:'8px'}}>
+            {viz}
+          </div>
+          </Col>
+        </Row>
+      </Container>
       </>
     );
   }

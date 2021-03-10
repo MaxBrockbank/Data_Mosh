@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 //Canvas variables not apart of class
 let ctx, center_x, center_y, radius, x_end, y_end, bar_height;
-const width = window.innerWidth;
-const height = window.innerHeight;
+const width = 1000;
+const height = 710;
 const bars = 1000;
 const bar_width = 1;
 radius = 0;
@@ -20,6 +20,8 @@ class vizOne extends React.Component{
   animationLooper(canvas) {
         canvas.width = width;
         canvas.height = height;
+        center_x = canvas.width / 2;
+        center_y = canvas.height / 2;
     
         ctx = canvas.getContext("2d");
     
@@ -46,7 +48,7 @@ class vizOne extends React.Component{
       gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
       ctx.fillStyle = gradient;
     
-      const lineColor = "#ff4a65";
+      const lineColor = this.props.color;
       ctx.strokeStyle = lineColor;
       ctx.lineWidth = bar_width;
       ctx.beginPath();
@@ -69,7 +71,6 @@ class vizOne extends React.Component{
       return(
         <>
         <canvas ref={this.canvas} />
-        {console.log(this.canvas.current)}
         </>
       )
     }

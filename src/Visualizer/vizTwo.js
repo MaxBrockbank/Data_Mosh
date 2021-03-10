@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 //Canvas variables not apart of class
 let ctx;
-const width = window.innerWidth;
-const height = window.innerHeight;
+const width = 1100;
+const height = 700;
 
 
 class vizTwo extends React.Component{
@@ -24,12 +24,12 @@ class vizTwo extends React.Component{
     
     drawLine(ctx, canvas) {
     
-      ctx.fillStyle = '#23346b';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0)';
       ctx.fillRect(0, 0, width, height);
 
 
       ctx.lineWidth = 6;
-      ctx.strokeStyle = '#ff4a65';
+      ctx.strokeStyle = this.props.color;
       ctx.beginPath();
 
       var sliceWidth = width * 1.0 / this.props.analyser.frequencyBinCount;
@@ -67,7 +67,6 @@ class vizTwo extends React.Component{
       return(
         <>
         {viz}
-        {console.log(this.canvas.current)}
         </>
       )
 
