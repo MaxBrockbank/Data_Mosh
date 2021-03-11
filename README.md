@@ -25,7 +25,7 @@ Welcome to Data Mosh! An audio visualizer to take your music listening experienc
 <br>
 
 ## Minimum Viable Product
-* A sleek, minimual UI
+* A sleek, minimal UI
 * A firebase database of audio files
 * Reactive animation to selected music file
 
